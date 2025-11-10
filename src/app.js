@@ -1,27 +1,25 @@
+let btn = document.getElementById("btn-generate");
+let clear = document.getElementById("btn-clear");
+let input = document.getElementById("input-base");
+let output = document.getElementById("output");
 
-// 🔹 Listas de palabras
-let pronoun = ["the", "our", "my", "your"];
-let adj = ["great", "cool", "awesome", "modern"];
-let noun = ["shop", "store", "app", "food"];
-let extensions = [".com", ".net", ".io", ".us"];
+btn.onclick = function() {
+  let name = (input.value || "hola").trim().toLowerCase().split(".")[0];
+  let tlds = [".com",".net",".org",".es",".us",".shop",".co",".ca",".io",".info",".biz",".mx",".ar",".uk",".fr",".de",".it",".br"];
+  let result = "";
 
-// 🔹 Función para generar un dominio aleatorio
-function generateDomain() {
-  let randomPronoun = pronoun[Math.floor(Math.random() * pronoun.length)];
-  let randomAdj = adj[Math.floor(Math.random() * adj.length)];
-  let randomNoun = noun[Math.floor(Math.random() * noun.length)];
-  let randomExt = extensions[Math.floor(Math.random() * extensions.length)];
+  for (let t of tlds) {
+    let domain = name + t;
+    console.log(domain);
+    result += domain + "\n";
+  }
 
-  let domain = randomPronoun + randomAdj + randomNoun + randomExt;
-  console.log(domain); // también lo muestra en consola
-  return domain.toLowerCase();
-}
+  output.textContent = result;
+};
 
-// 🔹 Conectar con el HTML
-let domainElement = document.getElementById("domain");
-let button = document.getElementById("generate");
+clear.onclick = function() {
+  output.textContent = "";
+  console.clear();
+};
 
-// 🔹 Mostrar dominio al hacer clic
-button.addEventListener("click", function () {
-  domainElement.textContent = generateDomain();
-});
+
